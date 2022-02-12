@@ -173,36 +173,37 @@ beginning or near the end of the transmission.
 
 Now that we've cracked the message, and know the rotor setting is CAA, and we know the plugboard, 
 what happens if we weaken the crib?  Delete letters from the crib, scan all wheel positions. 
-(You can also put wildcard spaces within the crib, e.g. "BEACHH AD")   What you should find
-is more false stops during the scan. The weaker the crib, the less often the machine
+(You can also put wildcard spaces within the crib, e.g. "BEACHH AD")   What you'll find is more
+false stops during the scan. The weaker the crib, the less often the machine
 can find a contradiction.
 
 Opening all the switches on the diagonal board (use the menu) also weakens the ability of
 the Bombe to reject cases.  For this same 
 alignment of the BEACHHEAD crib to
-the intercepted message, the TinyBombe finds 10 false stops before it reaches the correct stop `CAA`.  (Use the
+the intercepted message, the TinyBombe finds 10 
+false stops before it reaches the correct stop `CAA`.  (Use the
 `Resume` button to continue scanning after a stop.) 
 
 When all the diagonal switches are open and your wheels stop at a false stop, you'll notice
 a few switches where the wires are live on one side, dead on the other.  Click on some of
 these switches to toggle them and see if you can clear the false stop condition. 
 
-Each wire in Welchman's diagonal board joins paired partner hypotheses.  
+Each wire in Welchman's diagonal board joins paired partner hypotheses. 
 Since the A.e bus wire 
 represents the hypothesis that A is steckered to E, then the 
-Enigma plug design is such that E must be steckered to A. 
-So Welchman's diagonal wire accounts 
+Enigma design means that E must be steckered to A. 
+Welchman's diagonal wire accounts 
 for this symmetry by connecting A.e to E.a.  
 
 ## A Cracking Game
 
-Enter your own cribword, e.g. DEADHEAD, or a phrase BEADED BABE into the Crib text box (left aligned). 
+Enter your own cribword, say DEADHEAD, or a phrase ADA BEACH into the Crib text box (left aligned). 
 (Internal spaces will be converted to `G` before encryption).  Now right-clck on the `Crib` 
 label (to the left of the textbox).
 A menu pops up, letting generate your own random puzzle which
 contains your crib somewhere.  Now 
 attempt to crack it.  If you get stuck, that same menu 
-allows you to get a hint (see everything, in fact).  
+allows you to get a hint (see everything, in fact). 
 The hint is shown in the application's title bar.
 
 Enjoy! Send me some feedback or suggestions, 
