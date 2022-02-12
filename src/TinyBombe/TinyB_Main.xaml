@@ -1,0 +1,39 @@
+﻿<Window x:Class="TinyBombe.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TinyBombe"
+        mc:Ignorable="d"
+        Title="Pete's 8-Letter Bombe Visualizer" Height="800" Width="1200" >
+    <Grid x:Name="mainGrid"    >
+        <Menu x:Name="mainMenu" Height="18" Width="173" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,0,0">
+            <MenuItem Header="Diagonals">
+                <CheckBox x:Name="useDiagonals"  Content="Use Welchman's Diagonal Board" IsChecked="True"></CheckBox>
+                <MenuItem  x:Name="btnOpenAll" Header="Open All" />
+                <MenuItem  x:Name="btnCloseAll" Header="Close All" />
+                <MenuItem  x:Name="btnToggleAll" Header="Toggle All"/>
+            </MenuItem>
+
+            <MenuItem Header="Examples"/>
+            <MenuItem Header="Help"/>
+        </Menu>
+
+        <TextBox x:Name="tbWindow" HorizontalAlignment="Left" Height="20" Margin="503,32,0,0" TextWrapping="Wrap" Text="AAA" CharacterCasing="Upper"  VerticalAlignment="Top" Width="36" KeyDown="tbWindow_KeyDown"/>
+        <Button x:Name="btnBack" Content="-" HorizontalAlignment="Left" Margin="479,32,0,0" VerticalAlignment="Top"   Width="20" Click="btnBack_Click"/>
+        <Button x:Name="btnFwd" Content="+" HorizontalAlignment="Left" Margin="543,32,0,0" VerticalAlignment="Top"  Width="20" Click="btnFwd_Click"/>
+
+        <Label  x:Name="btnCrib" Content="Crib:" HorizontalAlignment="Left" Margin="33,78,0,0" Padding="0"    VerticalAlignment="Top" Height="18"/>
+        <Label  Content="Intercept:" HorizontalAlignment="Left" Margin="10,58,0,0" Padding="0"    VerticalAlignment="Top" Height="18"/>
+        <CheckBox x:Name="cbReplaceSpaces" Content="Replace 'G's by spaces" HorizontalAlignment="Left" Margin="619,11,0,0" VerticalAlignment="Top" IsChecked="True" Click="cbReplaceSpaces_Click" Width="141"/>
+
+        <Button  Content="Scan All"  Padding="0"  HorizontalAlignment="Left"   Margin="189,32,0,0" VerticalAlignment="Top" Width="59" Click="btnScan_Click"  />
+        <Button x:Name="btnResume" Content="Resume"  Padding="0"  HorizontalAlignment="Left"   Margin="315,32,0,0" VerticalAlignment="Top" Width="55" Click="btnResume_Click"  />
+        <Button x:Name="btnPause" Content="Pause"  Padding="0"  HorizontalAlignment="Left"   Margin="254,32,0,0" VerticalAlignment="Top" Width="55" Click="btnPause_Click"  />
+        <Label  x:Name="RecoveredWithPlugs"  Content="" HorizontalAlignment="Left" Margin="778,35,0,0" Padding="0"    VerticalAlignment="Top" Height="18" FontFamily="Consolas" FontWeight="Bold" FontSize="14"/>
+        <TextBox x:Name="PlugGuesses" HorizontalAlignment="Left" Height="19" Text =""  CharacterCasing="Upper"  Margin="664,32,0,0"   VerticalAlignment="Top" Width="97" FontFamily="Consolas" FontWeight="Bold" FontSize="14" KeyDown="PlugGuesses_KeyDown"  />
+       <Label  Content="Recovered Message" HorizontalAlignment="Left" Margin="773,6,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+
+
+    </Grid>
+</Window>
