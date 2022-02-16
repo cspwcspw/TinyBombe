@@ -48,7 +48,7 @@ When you run TinyBombe you'll start up with a screen like this:
 The vertical wires are the bus lines to which scramblers can be attached. There are
 8 buses, A,B,C,D,E,F,G,H, each bus with 8 wires labeled a,b,c,d,e,f,g,h.
 
-The diagonal board cross-connects are at the bottom - I've given each wire
+The diagonal board cross-connects are at the bottom. I've given each wire
 its own switch so that you can selectively "disconnect" diagonal board cross-wires.
 The first menu item at the top gives some options to include or 
 exclude use of the diagonal board. 
@@ -57,10 +57,12 @@ So we have some intercepted gobbldegook text, and we're led to believe
 that somewhere, for some unknown wheel settings, and some unknown plugboard settings, 
 the ciphertext encodes the crib "BEACHHEAD". Can we find where the crib possibly 
 aligns to the ciphertext?  And then can we use the correspondence between 
-ciphertext and the crib to build a *menu* (the graph of relationships).  
+ciphertext and the crib to build a *menu* (the graph of letter mappings, each
+at a different offset position i.e. a wheel setting that is a few steps ahead of 
+the starting wheel position).  
 
-From the menu we can wire up the scramblers to 
-to eliminate contradictions.  Our goal is to find some rotor settings and 
+From the menu we can wire up the scramblers to detect and 
+eliminate contradictions.  Our goal is to find some rotor settings and 
 plugs so that, when the intercepted message is decrypted, the rest of the resulting 
 message makes sense.  (Remember, the German practice in WWII was to change settings
 every day at midnight, so once the rotor and plug settings for a single message had 
@@ -92,16 +94,18 @@ imply E <--> A).  (The A <--> E notation means A scrambles to E, and vice-versa.
 
 3. Each scrambler is "offset" in time, or steps, by its position in the crib. Since the start
 of the intercept is currently set to be at AAA, that first scramber is +3 steps along. 
-By time that scrambling took place, the wheel settings would have clicked over three times,
+By time that scrambling took place, the Enigma operator would have pressed three keys,
+and the wheel settings would have clicked over three times,
 putting that scrambler into wheel setting AAD.
 
-4. Most of the wires have gone red / live. Once wired up, a voltage is injected onto one of the bus
-wires (in this diagram at E.c).  You can click on the voltage arrow to toggle it on/off, or
+4. Most of the wires have gone red / live. Once the Bombe was wired up, 
+a voltage was injected onto one of the bus
+wires (in this diagram at E.c).  Here uou can click on the voltage arrow to toggle it on/off, or
 right click to attach the voltage to any other bus wire instead.  Best practice was to use 
 a bus that had the most scramblers plugged into it, so E was chosen here.  
 
 5. Use the + and - buttons near the AAA window settings to single-step the TinyBombe. Each step
-moves the rotors in all scramblers, so the cross-connects change in every scrambler, 
+moves the rotors in all the scramblers, so the cross-connects change in every scrambler, 
 and the voltages propagate through different paths.  
 
 6. Each scrambler represents the core wiring of an Enigma machine, and is always 
@@ -111,10 +115,10 @@ that D is cross-wired to B.
 7. TinyBombe only has 8 symbols on each of its three rotor wheels, 8x8x8 = 512 different 
 possible wheel settings.  So click away until you get bored. 
 What you are trying to find is some setting of the wheels that "detaches" 
-one of the many possible circuits through the sramblers from all others. 
-In this case, one of the wires at the test register will remain unlit.  
-(Or, if you chose to place the voltage on a wire in that "detached circuit", 
-only a single wire will be lit in each bus).
+one of the many possible circuits through the sramblers and buses from all others. 
+When (and if) that happens, just one of the wires at the test register will remain unlit.  
+(Or, if you luckily chose to place the voltage on a wire in the "detached circuited", 
+only a single wire will light in each bus).
 
 8. OK, time to turn on the automatic scan.   Press the `Scan All` button, and hope 
 for some success.  You won't get it yet.  The machine scans the 512 possiblities 
@@ -127,8 +131,9 @@ The next space produces the second viable alignment position. Maybe this is the 
 
 On the new scan at this alignment, the Bombe finds a possible `Stop` position at rotor 
 setting `CAA`. The recovered message (shown near the top right) doesn't make any sense yet, 
-but we have discovered a core rotor position.  Once we have a candidate rotor position, 
-can we infer some possible plugboard settings that will make sense of the decryption? 
+but we have discovered a core rotor position that is consistent with our menu.  
+Once we have this candidate rotor position, can we infer some possible plugboard 
+settings that will make sense of the decryption? 
 
 <img src="images/tb_stopCAA.png">
 
@@ -142,16 +147,18 @@ where you randomly chose to inject the test voltage.
 
 2. Now the "aha!" part.  Each wire in the machine represents an hypothesis about how symbols are 
 cross-steckered (plugged up). So the wire A.e represents the hypothesis that A is plugged to E. 
-When all wires in a bus are lit, or if more than one is lit, 
+When the wire is lit, it says "we believe this hypothesis to be true".  
+But when all the wires in a bus are lit, or if more than one is lit, 
 it represents a contradiction. A cannot be steckered to B and also 
-steckered to C at the same time. So Bombe can reject most wheel settings.  
+steckered to C at the same time. So Bombe can reject most wheel settings. that light
+up too many wires in a bus, leading to a contradiction.   
 But when the Bombe stops, it gives
 us the starting point for the possible plugboard plugs.  
 
 3. From the diagram, in the A bus, any choice of steckering
 for A creates contradictions (more than one lit wire) except 
 the case if A is steckered to E. Then we look at the other buses,
-and find B,C,F,H are not steckered: they map to themselves.  
+and find B,C,F,H are not steckered, or self-steckered: they map to themselves.  
 But D and G are mutually interchanged with a plug.  
 
 So we enter the plugs "AE DG" 
@@ -163,11 +170,29 @@ Success! Apparently our secret intercept decodes to
 "ACED BEACHHEAD A BAD BEADED BEACHBABE FED DAD". This look sufficiently like
 a random collection of English Scrabble words to conclude that we've found the settings. 
 (It is really quite hard to make decent sentences and words with only 7 or 8 letters,
-depending if we want to use the 'G' as a space!)
+especially when I choose to use the 'G' as a space!)
 
 Notice now that the crib BEACHHEAD is properly aligned under BEACHHEAD in the decrypted 
 version of the message. I assume most useful cribs were found near the 
 beginning or near the end of the transmission.
+
+## The Menu
+
+For this cracked situation, we have BEACHHEAD aligned with HBBEGCAFH.  If we draw the 
+menu graph BH must be wired to one another at some scrambler position (+5 in this case,
+since I start counting with 0 at the start of the ciphertext).  
+Then with the scramblers clicked forward to +6, we hae EA wired together, etc. 
+I'm drawing the graph aftere the event here, but of course this graph and alignment
+would have been figured out ahead of wiring up the Bombe.
+
+
+<img src="images/tb_menu.png">
+
+The insight here is that the eight nodes (vertices) in this graph 
+correspond to the 8 buses in TinyBombe, and each edge/connection in the graph
+is represented in TinyBombe by a new scrambler offset from the reference position
+AAA by some steps.
+
 
 ## Playground Time
 
@@ -198,7 +223,7 @@ for this symmetry by connecting A.e to E.a.
 ## A Cracking Game
 
 Enter your own cribword, say DEADHEAD, or a phrase ADA BEACH into the Crib text box (left aligned). 
-(Internal spaces will be converted to `G` before encryption).  Now right-clck on the `Crib` 
+(Internal spaces will be converted to `G` before encryption).  Now right-click on the `Crib` 
 label (to the left of the textbox).
 A menu pops up, letting generate your own random puzzle which
 contains your crib somewhere.  Now 
